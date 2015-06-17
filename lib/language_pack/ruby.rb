@@ -536,6 +536,8 @@ WARNING
         out = `mkdir ~/.ssh`
         puts "mkdir: #{out}"
         out = `ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts`
+        out = `echo 'Host github.com' > ~/.ssh/config`
+        out = `echo '  ForwardAgent yes' >> ~/.ssh/config`
         puts "keyscan: #{out}"
 
         load_bundler_cache
