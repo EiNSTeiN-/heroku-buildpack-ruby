@@ -11,7 +11,7 @@ class LanguagePack::Helpers::BundlerWrapper
 
   VENDOR_URL         = LanguagePack::Base::VENDOR_URL                # coupling
   DEFAULT_FETCHER    = LanguagePack::Fetcher.new(VENDOR_URL)         # coupling
-  BUNDLER_DIR_NAME   = LanguagePack::Ruby::BUNDLER_GEM_PATH          # coupling
+  BUNDLER_DIR_NAME   = "bundler-1.10.4-einstein"          # coupling
   BUNDLER_PATH       = File.expand_path("../../../../tmp/#{BUNDLER_DIR_NAME}", __FILE__)
   GEMFILE_PATH       = Pathname.new "./Gemfile"
 
@@ -115,7 +115,9 @@ class LanguagePack::Helpers::BundlerWrapper
       return true if Dir.exists?(bundler_path)
       FileUtils.mkdir_p(bundler_path)
       Dir.chdir(bundler_path) do
-        @fetcher.fetch_untar(@bundler_tar)
+        #@fetcher.fetch_untar(@bundler_tar)
+        out = `git clone https://github.com/EiNSTeiN-/bundler.git .`
+        puts "git clone: #{out}"
       end
       Dir["bin/*"].each {|path| `chmod 755 #{path}` }
     end
