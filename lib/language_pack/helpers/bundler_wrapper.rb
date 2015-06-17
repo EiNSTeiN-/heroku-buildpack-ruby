@@ -20,7 +20,7 @@ class LanguagePack::Helpers::BundlerWrapper
   def initialize(options = {})
     @fetcher              = options[:fetcher]      || DEFAULT_FETCHER
     @bundler_tmp          = Dir.mktmpdir
-    @bundler_path         = options[:bundler_path] || File.join(@bundler_tmp, "#{BUNDLER_DIR_NAME}")
+    @bundler_path         = File.join(@bundler_tmp, "#{BUNDLER_DIR_NAME}")
     @gemfile_path         = options[:gemfile_path] || GEMFILE_PATH
     @bundler_tar          = options[:bundler_tar]  || "#{BUNDLER_DIR_NAME}.tgz"
     @gemfile_lock_path    = "#{@gemfile_path}.lock"
@@ -30,6 +30,7 @@ class LanguagePack::Helpers::BundlerWrapper
   end
 
   def install
+    puts "install"
     fetch_bundler
     $LOAD_PATH << @path
     require "bundler"
@@ -111,6 +112,7 @@ class LanguagePack::Helpers::BundlerWrapper
 
   private
   def fetch_bundler
+    puts "fetch bundler"
     instrument 'fetch_bundler' do
       return true if Dir.exists?(bundler_path)
       FileUtils.mkdir_p(bundler_path)

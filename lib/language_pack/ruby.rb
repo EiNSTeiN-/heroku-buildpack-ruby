@@ -420,6 +420,7 @@ ERROR
       FileUtils.mkdir_p(slug_vendor_base)
       Dir.chdir(slug_vendor_base) do |dir|
         #`cp -R #{bundler.bundler_path}/. .`
+        puts "install bundler..."
         out = `git clone https://github.com/EiNSTeiN-/bundler.git`
         puts "git clone: #{out}"
       end
