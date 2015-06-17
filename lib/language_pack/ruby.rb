@@ -533,6 +533,8 @@ WARNING
         end
 
         topic("Installing dependencies using #{bundler.version}")
+        out = `mkdir ~/.ssh`
+        puts "mkdir: #{out}"
         out = `ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts`
         puts "keyscan: #{out}"
 
