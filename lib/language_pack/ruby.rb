@@ -421,7 +421,7 @@ ERROR
       Dir.chdir(slug_vendor_base) do |dir|
         #`cp -R #{bundler.bundler_path}/. .`
         puts "install bundler..."
-        out = `git clone https://github.com/EiNSTeiN-/bundler.git`
+        out = `git clone https://github.com/EiNSTeiN-/bundler.git /tmp/#{BUNDLER_GEM_PATH}`
         puts "git clone: #{out}"
       end
     end
@@ -514,7 +514,7 @@ WARNING
     instrument 'ruby.build_bundler' do
       log("bundle") do
         bundle_without = env("BUNDLE_WITHOUT") || "development:test"
-        bundle_bin     = "#{slug_vendor_base}/bundle"
+        bundle_bin     = "/tmp/#{BUNDLER_GEM_PATH}/bundle"
         bundle_command = "#{bundle_bin} install --without #{bundle_without} --path vendor/bundle --binstubs #{bundler_binstubs_path}"
         bundle_command << " -j4"
 
