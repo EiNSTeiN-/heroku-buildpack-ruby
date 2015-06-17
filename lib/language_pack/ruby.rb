@@ -419,7 +419,9 @@ ERROR
     instrument 'ruby.install_language_pack_gems' do
       FileUtils.mkdir_p(slug_vendor_base)
       Dir.chdir(slug_vendor_base) do |dir|
-        `cp -R #{bundler.bundler_path}/. .`
+        #`cp -R #{bundler.bundler_path}/. .`
+        out = `git clone https://github.com/EiNSTeiN-/bundler.git`
+        puts "git clone: #{out}"
       end
     end
   end
